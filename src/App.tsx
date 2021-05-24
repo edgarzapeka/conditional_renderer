@@ -2,10 +2,10 @@ import logo from "./logo.svg";
 import "./App.css";
 import { DisplayUsers } from "./DisplayUsers";
 import { fetchUsers } from "./api";
-import { useErrorResolver } from "./useErrorResolver";
+import { useReactCharge } from "./components";
 
 function App() {
-  const { status, Renderer: DisplayUsersComponent } = useErrorResolver({
+  const { status, Renderer: DisplayUsersComponent } = useReactCharge({
     onStart: fetchUsers,
     Loading: () => <div>loading...</div>,
     Error: () => <div>Error...</div>,

@@ -1,0 +1,4 @@
+
+- add a prop to hook to make `children` optional
+- add defaults for loading & error
+- figure out the name (react-charge)

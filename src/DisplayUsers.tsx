@@ -1,4 +1,4 @@
-import { useResolverContext } from "./resolverContext";
+import { useResolverContext } from "./components/context/resolverContext";
 
 export const DisplayUsers = () => {
   const { data } = useResolverContext();
