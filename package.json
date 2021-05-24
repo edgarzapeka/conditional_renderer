@@ -1,7 +1,7 @@
 {
-  "name": "test-stuff",
+  "name": "react-charge",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@cassiozen/usestatemachine": "^0.3.2",
     "@testing-library/jest-dom": "^5.11.4",
@@ -12,6 +12,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "react": "^17.0.2",
+    "react-charge": "^0.1.0",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "typescript": "^4.1.2",
@@ -21,12 +22,18 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "publish:npm": "rm -rf dist && mkdir dist &&  babel src/components -d dist --copy-files"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react"
     ]
   },
   "browserslist": {
