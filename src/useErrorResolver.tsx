@@ -19,24 +19,31 @@ interface IUseErrorResolverProps {
   onStart: () => Promise<any>;
   Loading: () => ReactElement;
   Error: () => ReactElement;
+  Success?: () => ReactElement;
 }
 
 const errorRenderer = ({
   networkStatus,
   Loading,
   Error,
+  Success,
 }: { networkStatus: NetworkStatus } & Pick<
   IUseErrorResolverProps,
-  "Loading" | "Error"
+  "Loading" | "Error" | "Success"
 >) => {
   console.log("rendering errorRenderer");
   return ({ children }: PropsWithChildren<{}>) => {
+    if (children && Success) {
+      console.warn(
+        "You provided `shildren` & `Success` compoents at the same time. Only `Success` will be rendered. Please remove children since they are ignored"
+      );
+    }
     console.log("RendererHoc:: rendering");
     if (networkStatus === NetworkStatus.Idle) return null;
     if (networkStatus === NetworkStatus.Fetching) return <Loading />;
     if (networkStatus === NetworkStatus.Failed) return <Error />;
     console.log("RendererHoc:: rendering children");
-    return <>{children}</>;
+    return <>{Success ? <Success /> : children}</>;
   };
 };
 
@@ -44,6 +51,7 @@ export const useErrorResolver = ({
   onStart,
   Loading,
   Error,
+  Success,
 }: IUseErrorResolverProps): IUseErrorResolverReturnType => {
   console.log("rendering useErrorResolver");
   const { setData } = useResolverContext();
@@ -74,6 +82,7 @@ export const useErrorResolver = ({
     networkStatus,
     Loading,
     Error,
+    Success,
   });
 
   return {

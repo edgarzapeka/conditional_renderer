@@ -1,17 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import { DisplayUsers } from "./DisplayUsers";
-import { NetworkResolver } from "./NetworkResolver";
-import { ErrorComponent } from "./ErrorComponent";
 import { fetchUsers } from "./api";
 import { useErrorResolver } from "./useErrorResolver";
 
 function App() {
-  const { status, Renderer } = useErrorResolver({
+  const { status, Renderer: DisplayUsersComponent } = useErrorResolver({
     onStart: fetchUsers,
     Loading: () => <div>loading...</div>,
     Error: () => <div>Error...</div>,
+    Success: DisplayUsers,
   });
 
   console.log(status);
@@ -22,9 +20,7 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <Renderer>
-          <DisplayUsers />
-        </Renderer>
+        <DisplayUsersComponent />
       </header>
     </div>
   );
